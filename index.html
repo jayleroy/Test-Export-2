@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SVG Export Test</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5.js-svg@1.0.1/dist/p5.svg.min.js"></script>
+  <style>
+    body {
+      background: #111;
+      color: #eee;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: sans-serif;
+    }
+    #export-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #444;
+      border: none;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    #export-btn:hover {
+      background: #666;
+    }
+  </style>
+</head>
+<body>
+  <main></main>
+  <button id="export-btn">Download SVG</button>
+
+  <script>
+    window.onload = () => {
+      let img;
+
+      window.preload = function () {
+        const base64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
+        img = loadImage(base64);
+      };
+
+      window.setup = function () {
+        createCanvas(100, 100, SVG);
+        noLoop();
+        document.getElementById("export-btn").addEventListener("click", () => {
+          save("svg-export-test.svg");
+        });
+      };
+
+      window.draw = function () {
+        background(255);
+        image(img, 0, 0, 100, 100);
+        stroke(0);
+        fill(255, 0, 0);
+        ellipse(50, 50, 50, 50);
+      };
+    };
+  </script>
+</body>
+</html>
